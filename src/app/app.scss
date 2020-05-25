@@ -1,5 +1,6 @@
 // Vars
 $base: #758a83;
+$base--dark: #3f4745;
 $light: #dfecef;
 $primary: #105557;
 $primary--dark: #294851;
@@ -27,84 +28,294 @@ $body: Lato, Helevtica, Arial, sans-serif;
   src: url('../media/fonts/lato_regular.ttf') format('truetype');
 }
 
-html, body {
+html, body, #root {
   height: 100%;
 }
 body {
   position: relative;
-  background: $primary--dark;
+  background: $white;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 16px;
-  &::before {
-    content: ' ';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    opacity: 0.4;
-    background-image: url('../media/images/home_studio.jpg');
-    background-repeat: no-repeat;
-    background-position: 50% 0;
-    -ms-background-size: cover;
-    -o-background-size: cover;
-    -moz-background-size: cover;
-    -webkit-background-size: cover;
-    background-size: cover;
+  font-family: Lato, Helvetica, sans-serif;
+  * {
+    box-sizing: border-box;
   }
 }
-.Wrap {
-  z-index: 1;
-  position: relative;
-  width: 640px;
-  padding: 20px;
-  margin: auto;
-  text-align: center;
-  box-sizing: border-box;
-  @media only screen and (max-device-width : 480px) {
-    width: 100%;
-  }
+h1, h2, h3, h4, h5, h6 {
+  font-family: Amatic, Georgia, serif;
+  margin: 0;
 }
-.Logo {
-  width: 50%;
+p {
+  font-family: Lato, Helvetica, sans-serif;
+  margin: 0;
+}
+button {
+  border: none;
   display: block;
-  margin: auto;
-  padding-bottom: 30px;
+  font-size: inherit;
+  font-family: Amatic, Georgia, serif;
+  padding: 0;
+  color: inherit;
 }
-.SignUp {
-  display: inline-block;
-  font-family: $display;
-  color: $white;
-  font-size: 3rem;
-  text-decoration: none;
-  background-color: $primary--dark;
-  padding: 15px 25px;
-  border-radius: 3px;
-  letter-spacing: 1px;
-  @media only screen and (max-device-width : 480px) {
-    font-size: 4rem;
-  }
-  &:hover {
-    background-color: $primary;
+
+// Reusable
+.u-Wrap {
+  padding: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+.u-Header {
+  font-size: 40px;
+  color: $base;
+  padding-bottom: 5px;
+}
+.u-Copy {
+  font-size: 20px;
+  color: $base--dark;
+  line-height: 2rem;
+  padding-bottom: 20px;
+}
+.u-Column {
+  &:not(:first-child) {
+    padding-left: 50px;
   }
 }
-.Social {
-  padding-top: 20px;
+.u-Color {
+  &--white {color: $white}
+}
+
+
+// Pages
+.Home {
+  background: url('../media/images/home_bg.png') repeat-x $primary--dark;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &-logo{
+    width: 25%;
+    display: block;
+    margin: auto;
+    padding-bottom: 30px;
+  }
+  &-title {
+    font-size: 80px;
+    color: $white;
+  }
+  &-intro {
+    font-size: 20px;
+    color: $light;
+    margin: auto;
+    max-width: 700px;
+    line-height: 25px;
+    letter-spacing: 1px;
+    padding-bottom: 20px;
+  }
+  &-arrow {
+    position: absolute;
+    bottom: 10px;
+    color: $white;
+    font-size: 60px;
+    opacity: .5;
+    cursor: pointer;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.About {
+  &-ownerImage {
+    width: 300px;
+    float: left;
+    padding: 0 15px 5px 0;
+  }
+}
+
+.Classes {
+  background-image: url('../media/images/home_studio.jpg');
+  width: 100%;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 100px 100px 170px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &-block {
+    background: rgba($base, .9);
+    padding: 15px;
+    width: 50%;
+  }
+  &-cta {
+    background: $primary;
+    color: $white;
+    opacity: .8;
+    font-size: 70px;
+    padding: 10px 20px;
+    margin-right: 50px;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.Store {
+  &-image {
+    width: 300px;
+    padding-right: 20px;
+  }
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    color: $primary--dark;
+    width: 100%;
+  }
+  &-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  &-header {
+    font-size: 20px;
+    font-family: Lato, Helvetica, sans-serif;
+  }
+  &-price {
+    font-size: 20px;
+    padding-top: 15px;
+  }
+  &-cta {
+    font-size: 25px;
+    font-family: Lato, Helvetica, sans-serif;
+    padding: 5px 10px;
+    margin-top: 5px;
+    background-color: $primary--dark;
+    opacity: .7;
+    color: $white;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.Contact {
+  padding: 100px 0 300px;
+  text-align: center;
+  color: $base--dark;
+  &-header {
+    font-size: 70px;
+  }
+  &-type {
+    font-size: 35px;
+    padding-top: 20px;
+  }
+  &-email {
+    font-size: 20px;
+  }
   &-icon {
     font-size: 50px;
     padding: 0 10px;
-    color: $light;
+    color: $base--dark;
     opacity: .6;
     &:hover {
       opacity: 1;
     }
     @media only screen and (max-device-width : 480px) {
       font-size: 100px;
+    }
+  }
+}
+
+// Components
+.Header {
+  height: 100px;
+  z-index: 1;
+  position: sticky;
+  top: 0;
+  background: $primary--dark;
+  display: flex;
+  justify-content: center;
+  &-inner {
+    display: flex;
+    position: relative;
+    padding-left: 200px;
+  }
+  &-logo {
+    width: 150px;
+    position: absolute;
+    left: 0;
+  }
+  &-nav {
+    display: flex;
+    justify-content: center;
+  }
+  &-navItem {
+    font-size: 50px;
+    color: $white;
+    opacity: .5;
+    position: relative;
+    font-family: Amatic, Georgia, serif;
+    display: flex;
+    align-items: center;
+    &:hover {
+      opacity: 1;
+    }
+    &:not(:first-child)::before {
+      content: ' | ';
+      font-size: 30px;
+      display: block;
+      padding: 0 15px;
+      color: $white;
+    }
+    &.is-selected {
+      opacity: 1;
+      &::after {
+        display: block;
+        position: absolute;
+        bottom: 10px;
+        content: ' ';
+        height: 3px;
+        background-color: $light;
+        width: 100%;
+      }
+    }
+  }
+}
+.Hero {
+  height: 300px;
+  width: 100%;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  &-block {
+    padding: 50px;
+    width: 40%;
+  }
+  &-header {
+    font-size: 60px;
+  }
+  &-copy {
+    @extend .u-Copy;
+    font-size: 23px;
+    line-height: 35px;
+  }
+  &--about {
+    background-image: url('../media/images/about_temp.jpg');
+  }
+  &--store {
+    background-image: url('../media/images/sale.jpg');
+    background-position: right;
+    background-color: $light;
+    background-size: 70%;
+    height: 400px;
+    .Hero-header, .Hero-copy {
+      color: $primary--dark;
+    }
+    .Hero-copy {
+      opacity: .8;
     }
   }
 }

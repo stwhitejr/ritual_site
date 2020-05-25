@@ -1,0 +1,110 @@
+// Vars
+$base: #758a83;
+$light: #dfecef;
+$primary: #105557;
+$primary--dark: #294851;
+$secondary: #475844;
+$white: #fff;
+$dark: #0a0b0a;
+
+$display: Amatic, Helevtica, Arial, sans-serif;
+$body: Lato, Helevtica, Arial, sans-serif;
+
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+@font-face {
+  font-family: 'Amatic';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('../media/fonts/amatic_regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('../media/fonts/lato_regular.ttf') format('truetype');
+}
+
+html, body {
+  height: 100%;
+}
+body {
+  position: relative;
+  background: $primary--dark;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  &::before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.4;
+    background-image: url('../media/images/home_studio.jpg');
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+  }
+}
+.Wrap {
+  z-index: 1;
+  position: relative;
+  width: 640px;
+  padding: 20px;
+  margin: auto;
+  text-align: center;
+  box-sizing: border-box;
+  @media only screen and (max-device-width : 480px) {
+    width: 100%;
+  }
+}
+.Logo {
+  width: 50%;
+  display: block;
+  margin: auto;
+  padding-bottom: 30px;
+}
+.SignUp {
+  display: inline-block;
+  font-family: $display;
+  color: $white;
+  font-size: 3rem;
+  text-decoration: none;
+  background-color: $primary--dark;
+  padding: 15px 25px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+  @media only screen and (max-device-width : 480px) {
+    font-size: 4rem;
+  }
+  &:hover {
+    background-color: $primary;
+  }
+}
+.Social {
+  padding-top: 20px;
+  &-icon {
+    font-size: 50px;
+    padding: 0 10px;
+    color: $light;
+    opacity: .6;
+    &:hover {
+      opacity: 1;
+    }
+    @media only screen and (max-device-width : 480px) {
+      font-size: 100px;
+    }
+  }
+}
