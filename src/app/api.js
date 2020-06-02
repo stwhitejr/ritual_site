@@ -46,15 +46,15 @@ const formatCatalog = items =>
   });
 
 export const getCatalog = () =>
-  fetch('http://ritualyogastudio.com/dev/catalog.php')
+  window.fetch('/dev/api/catalog')
     .then(response => response.json())
-    .then(response => response.objects)
+    .then(response => response.objects || [])
     .then(formatCatalog)
     .catch(e => console.log(e));
 
 export const checkout = catalogItemId =>
-  fetch(
-    `http://ritualyogastudio.com/dev/checkout.php?catalogItemId=${catalogItemId}`
+  window.fetch(
+    `/dev/api/checkout?catalogItemId=${catalogItemId}`
   )
     .then(response => {
       console.log(response);

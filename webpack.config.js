@@ -9,6 +9,11 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
+    proxy: [{
+      path: '/dev/api',
+      target: 'http://ritualyogastudio.com',
+      changeOrigin: true,
+    }]
   },
   module: {
     rules: [

@@ -14,8 +14,8 @@ class App extends Component {
         <img src={Logo} className="Logo" />
         <a href={`mailto:${EMAIL_ADDRESS}`} rel="noopener noreferrer" className="SignUp">Sign Up for Virtual Classes!</a>
         <div className="Social">
-          <a href={FACEBOOK_URL} className="Social-icon"><i class="fab fa-facebook-square" /></a>
-          <a href={INSTAGRAM_URL} className="Social-icon"><i class="fab fa-instagram-square" /></a>
+          <a href={FACEBOOK_URL} className="Social-icon"><i className="fab fa-facebook-square" /></a>
+          <a href={INSTAGRAM_URL} className="Social-icon"><i className="fab fa-instagram-square" /></a>
         </div>
       </div>
     );

@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import App from '@root/app/app';
 
 const AppRouter = () => (
-  <Router basename="/dev">
+  <Router basename="/">
     <Switch>
       <Route
         path="/about"
