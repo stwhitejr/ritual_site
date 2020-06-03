@@ -46,7 +46,7 @@ const formatCatalog = items =>
   });
 
 export const getCatalog = () =>
-  window.fetch('/dev/api/catalog')
+  window.fetch('/api/catalog')
     .then(response => response.json())
     .then(response => response.objects || [])
     .then(formatCatalog)
@@ -54,7 +54,7 @@ export const getCatalog = () =>
 
 export const checkout = catalogItemId =>
   window.fetch(
-    `/dev/api/checkout?catalogItemId=${catalogItemId}`
+    `/api/checkout?catalogItemId=${catalogItemId}`
   )
     .then(response => {
       console.log(response);

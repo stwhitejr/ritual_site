@@ -10,7 +10,7 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     proxy: [{
-      path: '/dev/api',
+      path: '/api',
       target: 'http://ritualyogastudio.com',
       changeOrigin: true,
     }]

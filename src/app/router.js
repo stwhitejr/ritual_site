@@ -1,10 +1,15 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import App from '@root/app/app';
+import Checkout from '@root/app/pages/checkout';
 
 const AppRouter = () => (
   <Router basename="/">
     <Switch>
+      <Route
+        path="/checkout"
+        render={props => <Checkout {...props} />}
+      />
       <Route
         path="/about"
         render={props => <App {...props} displayHeader={true} page="about" />}

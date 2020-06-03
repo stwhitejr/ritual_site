@@ -107,7 +107,7 @@ const About = React.forwardRef((props, ref) => {
           <h2 className="u-Header">Meet The Owner</h2>
           <img src={Owner} className="About-ownerImage" alt="Ritual Yoga" />
           <p className="u-Copy">
-            ara’s interest in yoga began when she was a child with an active
+            Sara’s interest in yoga began when she was a child with an active
             imagination. She practiced yoga poses, listened to meditation tapes,
             burned incense and made potions from dirt and glitter with her best
             friend. It felt like magic.
