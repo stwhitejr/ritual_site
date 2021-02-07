@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
 import cx from 'classnames';
 import Owner from '@root/media/images/owner.jpg';
 import Hero from '@root/app/components/hero';
+import '@root/app/pages/about.scss';
 
 const testimonials = [
   {
@@ -22,6 +22,7 @@ const testimonials = [
     author: 'Rachel N',
   },
 ];
+
 const Testimonials = () => {
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [isTransitioning, setTransition] = useState(false);
@@ -79,27 +80,6 @@ const About = React.forwardRef((props, ref) => {
             “me time” that you deserve — that time and space to give your mind
             and body exactly what it needs.
           </p>
-          {/*<h3 className="u-SubHeader">
-            Are you an avid yogi? A “drop in when you have the time” go-getter?
-            Or perhaps entirely new to the world of yoga?
-          </h3>
-          <p className="u-Copy">
-            Ritual Yoga welcomes all and offers the variety to suit everyone’s
-            needs – whether that means getting a hard work out or just unwinding
-            from a long day — we offer classes for all.
-          </p>
-          <p className="u-Copy">
-            Check out the{' '}
-            <Link to="classes" className="u-Link">
-              classes
-            </Link>{' '}
-            we have to offer below and feel free to reach out to us with any
-            questions if you‘re unsure of what best fits your needs.
-          </p>*/}
-          <h2 className="u-SubHeader">
-            All of our classes are currently virtual until we can open our new
-            space in South Weymouth, MA
-          </h2>
 
           <Testimonials />
         </section>

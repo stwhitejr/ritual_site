@@ -1,0 +1,118 @@
+@import '../../core/core.scss';
+
+.Header {
+  z-index: 1;
+  position: sticky;
+  top: 0;
+  background: $primary--dark;
+  display: flex;
+  justify-content: center;
+  transition: height .5s;
+  height: 150px;
+  &.is-navOpen {
+    height: 490px;
+  }
+  @media only screen and (min-device-width: $mobileThreshold) {
+    height: 60px;
+    &.is-navOpen {
+      height: 60px;
+    }
+  }
+  &-mobileNavButton {
+    font-size: 300%;
+    position: absolute;
+    left: 20px;
+    top: 25px;
+    color: $white;
+    opacity: .5;
+    z-index: 2;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  &-inner {
+    position: relative;
+    opacity: 0;
+    transition: opacity 1s;
+    display: block;
+    padding: 10px 20px;
+    @media only screen and (min-device-width: $mobileThreshold) {
+      display: flex;
+      padding: 0 0 0 150px;
+    }
+    &.is-visible {
+      opacity: 1;
+    }
+  }
+  &-logo {
+    position: static;
+    display: block;
+    margin: 0 auto 10px;
+    width: 130px;
+    @media only screen and (min-device-width: $mobileThreshold) {
+      width: 100px;
+      position: absolute;
+      left: 0;
+      margin: none;
+    }
+  }
+  &-nav {
+    opacity: 0;
+    transition: opacity .5s;
+    &.is-navOpen {
+      opacity: 1;
+      display: block;
+    }
+    @media only screen and (min-device-width: $mobileThreshold) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 1;
+      &.is-navOpen {
+        display: flex;
+      }
+    }
+  }
+  &-navDivider {
+    font-size: 150%;
+    padding: 0 15px;
+    color: $white;
+    opacity: .3;
+    display: none;
+    @media only screen and (min-device-width: $mobileThreshold) {
+      display: block;
+    }
+  }
+  &-navItem {
+    font-size: 250%;
+    color: $white;
+    opacity: .5;
+    position: relative;
+    font-family: Amatic, Georgia, serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.3;
+    width: auto;
+    @media only screen and (min-device-width: $mobileThreshold) {
+      width: 100%;
+      font-size: 190%;
+    }
+    &:hover {
+      opacity: 1;
+    }
+    &.is-selected {
+      opacity: 1;
+      &::after {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        content: ' ';
+        height: 3px;
+        background-color: $light;
+        opacity: .6;
+        width: 100%;
+      }
+    }
+  }
+}

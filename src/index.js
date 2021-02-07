@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
-import AppRouter from '@root/app/router';
+import App from '@root/app/app';
 
-render(<AppRouter />,
+render(<App />,
   document.getElementById('root')
 );

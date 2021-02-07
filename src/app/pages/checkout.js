@@ -1,8 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import Logo from '@root/media/images/logo_white.png';
+import '@root/app/pages/checkout.scss';
 
 const Checkout = () => {
+  useEffect(() => {
+    // Remove cart from storage
+    const storage = window.localStorage;
+    storage.removeItem('RitualCart');
+  }, []);
   return (
     <div className="Checkout">
       <div className="Checkout-inner">

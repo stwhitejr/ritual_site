@@ -6,14 +6,19 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    publicPath: '/',
   },
   devServer: {
     historyApiFallback: true,
-    proxy: [{
-      path: '/api',
-      target: 'http://ritualyogastudio.com',
-      changeOrigin: true,
-    }]
+    publicPath: 'http://localhost:8080/',
+    proxy: [
+      {
+        path: '/api',
+        target: 'http://127.0.0.1:8000', //php -S 127.0.0.1:8000
+        // target: 'https://www.ritualyogastudio.com',
+        changeOrigin: true,
+      },
+    ],
   },
   module: {
     rules: [
@@ -42,8 +47,8 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: 'style-loader!css-loader!sass-loader'
-      }
+        loader: 'style-loader!css-loader!sass-loader',
+      },
     ],
   },
   plugins: [

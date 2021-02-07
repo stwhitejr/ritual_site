@@ -1,5 +1,5 @@
 import React from 'react';
-// import '@root/app/app.scss';
+import '@root/app/components/hero.scss';
 
 const Hero = props => {
   return (

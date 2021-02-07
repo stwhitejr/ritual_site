@@ -1,0 +1,75 @@
+@import '../../core/core.scss';
+
+.Hero {
+  height: 300px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: initial;
+  background-position: top;
+  @media only screen and (min-device-width: $mediumScreen) and (min-width: $mediumScreen) {
+    background-attachment: fixed;
+    background-position: center;
+  }
+  &-block {
+    padding: 50px;
+    width: 100%;
+    @media only screen and (min-device-width: $mediumScreen) and (min-width: $mediumScreen) {
+      width: 55%;
+    }
+  }
+  &-header {
+    font-size: 400%;
+  }
+  &-copy {
+    @extend .u-Copy;
+    font-size: 150%;
+  }
+  &--about {
+    background-image: url('../../media/images/about.jpg');
+    height: 500px;
+    background-position-y: initial;
+    // @media only screen and (min-device-width: $mediumScreen) and (min-width: $mediumScreen) {
+    //   background-position-y: 100px;
+    // }
+    // @media only screen and (min-device-width: $mobileThreshold) {
+    //   height: 300px;
+    // }
+  }
+  &--store {
+    background-image: url('../../media/images/sale.jpg');
+    background-position: top right;
+    background-color: $light;
+    height: auto;
+    @media only screen and (min-device-width: $mediumScreen) and (min-width: $mediumScreen) {
+      background-size: 50%;
+      min-height: 200px;
+      .Hero-block {
+        background-color: transparent;
+      }
+    }
+    .Hero-header {
+      font-size: 250%;
+    }
+    .Hero-copy {
+      @extend .u-Copy;
+      font-size: 110%;
+    }
+    .Hero-block {
+      background-color: rgba($light, .8);
+      padding: 20px 50px;
+      @media only screen and (min-device-width: $mediumScreen) and (min-width: $mediumScreen) {
+        width: 45%;
+      }
+    }
+    .Hero-header, .Hero-copy {
+      color: $primary--dark;
+    }
+    .Hero-copy {
+      opacity: 1;
+      @media only screen and (min-device-width: $mediumScreen) and (min-width: $mediumScreen) {
+        opacity: .8;
+      }
+    }
+  }
+}

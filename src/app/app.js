@@ -1,131 +1,205 @@
 import React, {Component, createRef} from 'react';
-import '@root/app/app.scss';
-import {Link} from 'react-router-dom';
-import Logo from '@root/media/images/logo_white.png';
-import {getCatalog} from '@root/app/api';
-import {HEADER_HEIGHT, PAGE} from '@root/app/constants';
-import Header from '@root/app/components/header';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Checkout from '@root/app/pages/checkout';
 import About from '@root/app/pages/about';
 import Classes from '@root/app/pages/classes';
-import Store from '@root/app/pages/store';
-import Contact from '@root/app/pages/contact';
+import StoreContainer from '@root/app/pages/store/store_container';
+import StoreCategories from '@root/app/pages/store/store_categories';
+import StoreCategory from '@root/app/pages/store/store_category';
+import StoreItem from '@root/app/pages/store/store_item';
+import {Link} from 'react-router-dom';
+import Logo from '@root/media/images/logo_white.png';
+import {getCatalog} from '@root/core/api';
+import LogoTealCircle from '@root/media/images/logo_circle_teal.png';
+import {
+  HEADER_HEIGHT,
+  PAGE,
+  CLASS_CATEGORY_ID,
+  HIDDEN_CATEGORY_ID,
+  SHIPPING_ITEM_ID,
+} from '@root/app/constants';
+import Header from '@root/app/components/header';
+import Footer from '@root/app/components/footer';
+import '@root/app/app.scss';
 
-class App extends Component {
+class AppWrapper extends Component {
   state = {
-    aboutOpacity: 0.1,
-    classesOpacity: 0.1,
-    storeOpacity: 0.1,
-    contactOpacity: 0.1,
+    opacity: 0,
     classes: [],
-  };
-
-  scrollToSelectedPage = (smooth = true) => {
-    window.scrollTo({
-      behavior: smooth ? 'smooth' : 'auto',
-      top: this[this.props.page].current.offsetTop - HEADER_HEIGHT,
-    });
+    shippingItem: {},
+    catalog: {},
+    isLoading: true,
   };
 
   componentDidMount = () => {
-    getCatalog().then(classes => {
-      this.setState({classes}, () => {
-        // If we do this outside of this API call then the page height changes due to the classes loading
-        // Should either server side render this with the classes already there or add a loading visual and remove when loaded
-        if (this.props.page !== PAGE.HOME) {
-          this.scrollToSelectedPage(false);
-        }
-      });
-    });
-    this.setState({[`${this.props.page}Opacity`]: 1}, () => {
-      const createObserver = (page, elem) => {
-        const key = `${page}Opacity`;
-        const observer = new IntersectionObserver(
-          entries => {
-            entries.forEach(entry => {
-              console.log(entry);
-              if (entry.isIntersecting) {
-                // We're considering this landing on the page at this point
-                this.setState({
-                  [key]: entry.intersectionRatio > 0.1 ? 1 : 0.1,
-                });
-                if (
-                  this.props.page !== page &&
-                  (entry.intersectionRatio > 0.1 &&
-                  entry.boundingClientRect.top > 0)
-                  || entry.intersectionRatio >= .5
-                ) {
-                  this.props.history.push(page, {fromScroll: true});
-                }
-              }
-            });
-          },
-          {
-            threshold: [0.1, .5, 1],
-          }
-        );
-        observer.observe(elem);
-      };
-
-      createObserver('about', this.about.current);
-      createObserver('classes', this.classes.current);
-      createObserver('store', this.store.current);
-      createObserver('contact', this.contact.current);
-    });
+    getCatalog()
+      .then(catalog => {
+        const {
+          [CLASS_CATEGORY_ID]: classes,
+          [HIDDEN_CATEGORY_ID]: hidden,
+          ...items
+        } = catalog.items;
+        console.log(hidden);
+        this.setState({
+          classes,
+          shippingItem: hidden[SHIPPING_ITEM_ID],
+          catalog: {items, categories: catalog.categories},
+        });
+      })
+      .catch(e => {
+        throw e;
+      })
+      .finally(() => this.setState({isLoading: false}));
+    this.setState({opacity: 1});
   };
 
   componentDidUpdate = prevProps => {
-    if (
-      prevProps.page !== this.props.page &&
-      !this.props.history.location.state?.fromScroll
-    ) {
-      this.scrollToSelectedPage();
-      // incase our observer changes the opacity too low, using setTimeout since we have a smooth scroll on the window
-      setTimeout(() => this.setState({[`${this.props.page}Opacity`]: 1}), 1000);
+    if (prevProps.page !== this.props.page) {
+      window.scrollTo(0, 0);
+      this.setState({opacity: 0}, () => {
+        setTimeout(() => {
+          this.setState({opacity: 1});
+        }, 100);
+      });
     }
   };
 
-  getContactHeight = () => window.innerHeight - HEADER_HEIGHT;
+  componentWillUnmount = () => {
+    this.setState({opacity: 0});
+  };
 
-  about = createRef();
-  classes = createRef();
-  store = createRef();
-  contact = createRef();
+  getFooterHeight = () => window.innerHeight - HEADER_HEIGHT;
+
   wrapper = createRef();
 
   render() {
-    return (
-      <>
-        <div className="Home">
-          <div className="Home-inner">
-            <img src={Logo} className="Home-logo" alt="Ritual Yoga" />
-            <h1 className="Home-title">What’s Your Ritual?</h1>
-            <p className="Home-intro">
-              Ritual Yoga Studio will be opening soon in South Weymouth, MA.
-              Until then we’ll be offering all of our classes virtually. See our
-              list of classes below to sign up today!
-            </p>
-          </div>
-          <Link to="about" className="Home-arrow">
-            <i className="fa fa-angle-double-down" />
-          </Link>
+    const {PageComponent} = this.props;
+
+    return this.state.isLoading ? (
+      <div className="Home">
+        <div>
+          <img src={LogoTealCircle} className="Home-loadingLogo" alt="Ritual Yoga" />
+          <div className="Home-loadingText">Loading</div>
         </div>
+      </div>
+    ) : (
+      <>
+        {this.props.page === PAGE.HOME && (
+          <div className="Home">
+            <div className="Home-inner">
+              <img src={Logo} className="Home-logo" alt="Ritual Yoga" />
+              <h1 className="Home-title">What’s Your Ritual?</h1>
+              <p className="Home-intro">
+                Ritual Yoga is a virtual yoga studio and shop where you can find
+                the tools to live a balanced life.
+              </p>
+            </div>
+            <Link to="about" className="Home-arrow">
+              <i className="fa fa-angle-double-down" />
+            </Link>
+          </div>
+        )}
         <div ref={this.wrapper}>
-          <Header isVisible={this.props.displayHeader} page={this.props.page} />
-          <About ref={this.about} opacity={this.state.aboutOpacity} />
-          <Classes
-            ref={this.classes}
-            opacity={this.state.classesOpacity}
+          <Header isVisible page={this.props.page} />
+          <PageComponent
+            opacity={this.state.opacity}
             classes={this.state.classes}
+            catalog={this.state.catalog}
+            shippingItem={this.state.shippingItem}
+            match={this.props.match}
+            location={this.props.location}
           />
-          <Store ref={this.store} opacity={this.state.storeOpacity} />
-          <Contact
-            ref={this.contact}
-            opacity={this.state.contactOpacity}
-            height={this.getContactHeight()}
-          />
+          <Footer height={this.getFooterHeight()} />
         </div>
       </>
     );
   }
 }
+
+const App = () => (
+  <Router basename="/">
+    <Switch>
+      <Route path="/checkout" render={props => <Checkout {...props} />} />
+      <Route
+        path="/about"
+        render={props => (
+          <AppWrapper
+            {...props}
+            displayHeader
+            PageComponent={About}
+            page="about"
+          />
+        )}
+      />
+      <Route
+        path="/classes"
+        render={props => (
+          <AppWrapper
+            {...props}
+            displayHeader
+            PageComponent={Classes}
+            page="classes"
+          />
+        )}
+      />
+
+      <Route
+        path="/store/:category/:item"
+        render={props => (
+          <AppWrapper
+            {...props}
+            displayHeader
+            PageComponent={props => (
+              <StoreContainer {...props}>
+                {props => <StoreItem {...props} />}
+              </StoreContainer>
+            )}
+            page="store"
+          />
+        )}
+      />
+      <Route
+        path="/store/:category"
+        render={props => (
+          <AppWrapper
+            {...props}
+            displayHeader
+            PageComponent={props => (
+              <StoreContainer {...props}>
+                {props => <StoreCategory {...props} />}
+              </StoreContainer>
+            )}
+            page="store"
+          />
+        )}
+      />
+      <Route
+        path="/store"
+        render={props => (
+          <AppWrapper
+            {...props}
+            displayHeader
+            PageComponent={props => (
+              <StoreContainer {...props}>
+                {props => <StoreCategories {...props} />}
+              </StoreContainer>
+            )}
+            page="store"
+          />
+        )}
+      />
+      <Route
+        path="/contact"
+        render={props => <AppWrapper {...props} displayHeader />}
+      />
+      <Route
+        path="/"
+        render={props => (
+          <AppWrapper {...props} PageComponent={About} page="home" />
+        )}
+      />
+    </Switch>
+  </Router>
+);
+
 export default App;

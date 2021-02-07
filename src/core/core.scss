@@ -1,0 +1,67 @@
+// Vars
+$base: #758a83;
+$base--light: #c1ceca;
+$base--medium: #505f5a;
+$base--dark: #3f4745;
+$light: #dfecef;
+$primary: #105557;
+$primary--dark: #294851;
+$secondary: #475844;
+$white: #fff;
+$dark: #0a0b0a;
+
+$mobileThreshold: 640px;
+$mediumScreen: 1000px;
+
+$display: Amatic, Helevtica, Arial, sans-serif;
+$body: Lato, Helevtica, Arial, sans-serif;
+
+
+.u-Wrap {
+  padding: 50px;
+  justify-content: space-between;
+  display: block;
+  @media only screen and (min-device-width: $mediumScreen) and (min-width: $mediumScreen) {
+    display: flex;
+  }
+}
+.u-Clear {
+  clear: both;
+}
+.u-Header {
+  font-size: 280%;
+  color: $base;
+  padding-bottom: 5px;
+}
+.u-SubHeader {
+  font-size: 150%;
+  color: $base;
+  font-family: Lato, Helvetica, sans-serif;
+  padding: 5px 0;
+}
+.u-Copy {
+  font-size: 120%;
+  color: $base--dark;
+  padding-bottom: 20px;
+}
+.u-Link {
+  color: $base;
+  &:hover {
+    color: $primary--dark;
+  }
+}
+.u-Column {
+  flex-basis: 49%;
+  &:not(:first-child) {
+    padding: 50px 0 0 0;
+    @media only screen and (min-device-width: $mediumScreen) and (min-width: $mediumScreen) {
+      padding: 0 0 0 50px;
+    }
+  }
+}
+.u-Color {
+  &--white {color: $white}
+}
+.u-PageHidden {
+  display: none !important;
+}

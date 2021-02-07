@@ -1,0 +1,32 @@
+@import '../../core/core.scss';
+
+.Footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  color: $light;
+  background-color: $primary--dark;
+  padding: 0 20px;
+  &-header {
+    font-size: 500%;
+    padding-top: 70px;
+  }
+  &-type {
+    font-size: 220%;
+    padding-top: 20px;
+  }
+  &-email {
+    font-size: 140%;
+  }
+  &-icon {
+    font-size: 400%;
+    padding: 0 10px;
+    color: $light;
+    opacity: .6;
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+  }
+}

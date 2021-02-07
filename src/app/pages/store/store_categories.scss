@@ -1,0 +1,44 @@
+@import '../../../core/core.scss';
+
+.StoreCategories {
+  &-item {
+    &::after {
+      content: ' ';
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-color: rgba($base, 0.8);
+    }
+    &:hover {
+      &::after {
+        background-color: rgba($base, 0.2);
+      }
+    }
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
+    height: 700px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    @media only screen and (min-device-width: $mobileThreshold) {
+      height: 300px;
+    }
+  }
+  &-title {
+    text-align: center;
+    background-color: #fff;
+    color: $base--dark;
+    font-size: 300%;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    @media only screen and (min-device-width: $mobileThreshold) {
+      font-size: 200%;
+    }
+  }
+}

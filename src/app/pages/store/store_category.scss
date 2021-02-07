@@ -1,0 +1,62 @@
+@import '../../../core/core.scss';
+
+.StoreCategory {
+  &-title {
+    font-size: 300%;
+  }
+  &-items {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  &-itemWrapper {
+    width: 48%;
+    padding-bottom: 30px;
+    &:nth-child(odd) {
+      padding-right: 30px;
+    }
+    @media only screen and (min-device-width: $mobileThreshold) {
+      padding: 30px;
+      width: 23%;
+    }
+  }
+  &-item {
+    color: $base--dark;
+    &:hover button,
+    &:focus button {
+      opacity: 1;
+    }
+  }
+  &-img {
+    width: 100%;
+  }
+  &-name {
+    font-family: $body;
+  }
+  &-price {
+    font-size: 90%;
+  }
+  &-button {
+    white-space: nowrap;
+    font-family: Lato, Helvetica, sans-serif;
+    padding: 25px;
+    margin-top: 15px;
+    width: 100%;
+    background-color: $primary--dark;
+    opacity: .7;
+    color: $white;
+    @media only screen and (min-device-width: $mobileThreshold) {
+      margin-top: 5px;
+      padding: 10px 30px;
+    }
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+    &--disabled {
+      background-color: #666;
+      opacity: 1;
+      cursor: default;
+    }
+  }
+}

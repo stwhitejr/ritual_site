@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {SMALL_SCREEN_CUTOFF, PAGE} from '@root/app/constants';
 import LogoTealCircle from '@root/media/images/logo_circle_teal.png';
 import cx from 'classnames';
+import '@root/app/components/header.scss';
 
 const Header = props => {
   const [showNav, setShowNav] = useState(false);
@@ -10,7 +11,10 @@ const Header = props => {
     if (window.screen.width > SMALL_SCREEN_CUTOFF) {
       setShowNav(true);
     }
-  }, [window.screen.width]);
+    if (showNav) {
+      setShowNav(false);
+    }
+  }, [window.screen.width, window.location.href]);
 
   const getShowMobileNavButton = () =>
     window.screen.width <= SMALL_SCREEN_CUTOFF;
@@ -43,16 +47,17 @@ const Header = props => {
           })}
         >
           <Link
-            to="about"
+            to="/about"
             className={cx('Header-navItem', {
-              'is-selected': props.page === PAGE.ABOUT,
+              'is-selected':
+                props.page === PAGE.ABOUT || props.page === PAGE.HOME,
             })}
           >
             about
           </Link>
           <div className="Header-navDivider">|</div>
           <Link
-            to="classes"
+            to="/classes"
             className={cx('Header-navItem', {
               'is-selected': props.page === PAGE.CLASSES,
             })}
@@ -61,7 +66,7 @@ const Header = props => {
           </Link>
           <div className="Header-navDivider">|</div>
           <Link
-            to="store"
+            to="/store"
             className={cx('Header-navItem', {
               'is-selected': props.page === PAGE.STORE,
             })}
@@ -69,6 +74,7 @@ const Header = props => {
             store
           </Link>
           <div className="Header-navDivider">|</div>
+          {/* TODO: Create a proper and separate contact page
           <Link
             to="contact"
             className={cx('Header-navItem', {
@@ -76,7 +82,15 @@ const Header = props => {
             })}
           >
             contact
-          </Link>
+          </Link> */}
+          <a
+            href="#Footer"
+            className={cx('Header-navItem', {
+              'is-selected': props.page === PAGE.CONTACT,
+            })}
+          >
+            contact
+          </a>
         </div>
       </div>
     </div>

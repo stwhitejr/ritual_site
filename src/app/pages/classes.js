@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {EMAIL_ADDRESS} from '@root/app/constants';
-import {checkout} from '@root/app/api';
+import {checkout} from '@root/core/api';
+import '@root/app/pages/classes.scss';
 
 const ClassDescription = ({description}) => {
   const [expanded, setExpanded] = useState(false);
@@ -24,15 +25,15 @@ const ClassDescription = ({description}) => {
 const ClassItems = ({classes}) => {
   const handleClick = ({catalogItemId, name, amount}) => {
     if (parseInt(amount, 10) > 0) {
-      checkout(catalogItemId);
+      checkout({isVirtualItem: true, items: [{id: catalogItemId, qty: '1'}]});
     } else {
       window.open(`mailto:${EMAIL_ADDRESS}?subject=${name}`);
     }
   };
   return (
     <div className="ClassItems">
-      {classes.map(({name, amount, description, catalogItemId}) => (
-        <div key={name} className="ClassItems-block">
+      {Object.entries(classes).map(([id, {name, amount, description, catalogItemId}]) => (
+        <div key={id} className="ClassItems-block">
           <div className="ClassItems-blockInner">
             <h3 className="ClassItems-name">{name}</h3>
             <div className="ClassItems-purchase">
@@ -78,8 +79,8 @@ const Classes = React.forwardRef((props, ref) => {
         <h1 className="Classes-header">Sign up for Yoga Classes Today!</h1>
         <p className="Classes-copy">
           All sessions are currently virtual and start at 9:30 am for the day
-          listed. You will receive an email with a link to join the session
-          for that day.
+          listed. You will receive an email with a link to join the session for
+          that day.
         </p>
       </div>
       <ClassItems classes={props.classes} />

@@ -1,0 +1,58 @@
+@import '../../core/core.scss';
+
+
+.About {
+  &-aboutInlineImage {
+    width: 200px;
+    margin: 0 auto;
+    display: block;
+    padding: 20px;
+  }
+  &-ownerImage {
+    width: 100%;
+    float: none;
+    padding: 0 0 15px;
+    @media only screen and (min-device-width: $mediumScreen) and (min-width: $mediumScreen) {
+      width: 300px;
+      float: left;
+      padding: 0 15px 5px 0;
+    }
+  }
+}
+
+.Testimonials {
+  margin-top: 30px;
+  text-align: center;
+  background: url('../../media/images/r_logo_teal.png') 95% 80% no-repeat;
+  background-size: 30%;
+  color: $base--dark;
+  border: solid 2px $base;
+  &-inner {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 40px;
+    background-color: rgba($white, .8);
+    min-height: 510px;
+    @media only screen and (min-device-width: $mobileThreshold) {
+      min-height: 330px;
+    }
+  }
+  &-copy,
+  &-author {
+    transition: opacity 1s;
+    &.is-transitioning {
+      opacity: 0;
+    }
+  }
+  &-copy {
+    font-size: 110%;
+    line-height: 1.8;
+  }
+  &-author {
+    padding-top: 5px;
+    font-size: 180%;
+    font-family: Amatic, Georgia, serif;
+  }
+}
