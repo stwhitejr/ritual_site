@@ -6,18 +6,17 @@
   }
   &-items {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
   }
   &-itemWrapper {
-    width: 48%;
-    padding-bottom: 30px;
+    width: 50%;
+    padding-bottom: 50px;
     &:nth-child(odd) {
-      padding-right: 30px;
+      padding-right: 50px;
     }
     @media only screen and (min-device-width: $mobileThreshold) {
-      padding: 30px;
-      width: 23%;
+      width: 25%;
+      padding-right: 50px;
     }
   }
   &-item {

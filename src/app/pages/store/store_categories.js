@@ -4,7 +4,6 @@ import '@root/app/pages/store/store_categories.scss';
 
 const StoreCategories = ({catalog}) => {
   const getImage = item => {
-    console.log(Object.values(item)[0]);
     return Object.values(item)[0].images[0];
   };
   const getCategoryName = item => Object.values(item)[0].categoryName;

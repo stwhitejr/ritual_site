@@ -39,7 +39,6 @@ class AppWrapper extends Component {
           [HIDDEN_CATEGORY_ID]: hidden,
           ...items
         } = catalog.items;
-        console.log(hidden);
         this.setState({
           classes,
           shippingItem: hidden[SHIPPING_ITEM_ID],

@@ -1,3 +1,4 @@
+const { _ } = require('core-js');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
@@ -5,7 +6,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: `bundle_${new Date().getTime()}.js`,
     publicPath: '/',
   },
   devServer: {
